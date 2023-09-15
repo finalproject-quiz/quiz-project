@@ -32,7 +32,6 @@ function App() {
         {activeQuestion && <Question  />}
         
       </div>
-}
       
     </>
   )
