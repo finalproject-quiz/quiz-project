@@ -1,12 +1,18 @@
-import { useState } from 'react'
-import silhouette from './silhouette.png'
-import './App.css'
-import Question from './Question'
-//import apiURL from ????!
+import { useState, useEffect } from 'react';
+import silhouette from './silhouette.png';
+import './App.css';
+import Question from './Question';
+import Login from './components/Login';
 
 function App() {
  
+  const [user, setUser] = useState(null);
+
+  const [data, setData] = useState(null);
+  
   const [activeQuestion, setActiveQuestion] = useState(null);
+  
+  const apiURL = "http://localhost:5110";
 
   async function fetchQuestions() {
     try {
@@ -17,10 +23,24 @@ function App() {
       const questionData = await response.json(); 
     } catch (error) {
       console.error(error);
+    };
+
+  async function login(user: string) {
+    await fetch(`${apiURL}/users`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name: user, score: 0 })
+    })
+    setUser(user);
+  };
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch(`${apiURL}/quizzes`)
+      setData(await res.json());
     }
-
-  }
-
+    getData();
+  }, []);
 
   return (
     <>
@@ -33,8 +53,9 @@ function App() {
         
       </div>
       
+      <Login login={login} />
     </>
   )
-}
+};
 
 export default App
