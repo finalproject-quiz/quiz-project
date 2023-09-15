@@ -14,17 +14,6 @@ function App() {
   
   const apiURL = "http://localhost:5110";
 
-  async function fetchQuestions() {
-    try {
-      const response = await fetch (`${apiURL}/question`);
-      if (!response.ok) {
-        throw new Error(`Fetch failed with status ${response.status}`); 
-      }
-      const questionData = await response.json(); 
-    } catch (error) {
-      console.error(error);
-    };
-
   async function login(user: string) {
     await fetch(`${apiURL}/users`, {
       method: "POST",
@@ -32,7 +21,7 @@ function App() {
       body: JSON.stringify({ name: user, score: 0 })
     })
     setUser(user);
-  };
+  }
 
   useEffect(() => {
     async function getData() {
@@ -41,21 +30,32 @@ function App() {
     }
     getData();
   }, []);
+ 
+  function nextQuestion() {
+    const nextQuestionId = activeQuestion.id + 1;
+    const nextQuestion = questions.find(
+      (question) => question.id === nextQuestionId
+    );
 
+    if (nextQuestion) {
+      setActiveQuestion(nextQuestion);
+    }
+  }
+ 
   return (
     <>
       <div id="title">
         <h1>The Renewable Energy Investments Quiz</h1>
         <img src={silhouette} id="wind-farm-silhouette" alt="a black silhouette of some drawings of wind turbines in front of a white background" />
       </div>
-      <div id="active-question">
-        {activeQuestion && <Question  />}
-        
-      </div>
+      {activeQuestion ? (
       
-      <Login login={login} />
+         <Question {...activeQuestion} nextQuestion={nextQuestion}/>
+      ) : (
+        <Login login={login} />
+      )}
     </>
   )
-};
+}
 
 export default App
