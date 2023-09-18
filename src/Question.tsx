@@ -1,7 +1,9 @@
+import "./Question.css"
+
 export default function Question(props) {
     const answers = [props.answer1, props.answer2, props.answer3, props.answer4];
 	return (
-		<div>
+		<div className="question">
 			<h2>{props.question}</h2>
 			{answers.map((answer, index) => (
 				<label htmlFor={`answer-${index}`} key={`answer-${index}`}>
@@ -14,7 +16,7 @@ export default function Question(props) {
 				</label>
 			))}
             <button onClick={props.nextQuestion}>
-                Next Question
+                {props.isLastQuestion ? "Submit" : "Next Question"}
             </button>
 		</div>
 	);

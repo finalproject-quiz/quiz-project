@@ -8,7 +8,7 @@ function App() {
  
   const [user, setUser] = useState(null);
 
-  const [data, setData] = useState(null);
+  const [questions, setQuestions] = useState(null);
   
   const [activeQuestion, setActiveQuestion] = useState(null);
   
@@ -25,8 +25,11 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch(`${apiURL}/quizzes`)
-      setData(await res.json());
+      const res = await fetch(`${apiURL}/quizzes`);
+      const questions = await res.json();
+      console.log(questions);
+      setQuestions(questions);
+      setActiveQuestion(questions[0])
     }
     getData();
   }, []);
@@ -48,9 +51,9 @@ function App() {
         <h1>The Renewable Energy Investments Quiz</h1>
         <img src={silhouette} id="wind-farm-silhouette" alt="a black silhouette of some drawings of wind turbines in front of a white background" />
       </div>
-      {activeQuestion ? (
+      {user ? (
       
-         <Question {...activeQuestion} nextQuestion={nextQuestion}/>
+         <Question {...activeQuestion} nextQuestion={nextQuestion} isLastQuestion={activeQuestion === questions.at(-1)}/>
       ) : (
         <Login login={login} />
       )}

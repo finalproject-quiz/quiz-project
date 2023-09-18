@@ -1,0 +1,7 @@
+.question label {
+    display: block;
+}
+
+.question label:last-of-type{
+    margin-bottom: 10px;
+}
