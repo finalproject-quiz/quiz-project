@@ -33,7 +33,7 @@ app.UseCors(builder =>
 });
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/quizzes", async (QuizDb db) => await db.Quizzes.ToListAsync());
+app.MapGet("/questions", async (QuizDb db) => await db.Questions.ToListAsync());
 
 app.MapPost("/users", async (QuizDb db, User user) =>
 {
@@ -42,10 +42,12 @@ app.MapPost("/users", async (QuizDb db, User user) =>
     return Results.Created($"/user/{user.Id}", user);
 });
 
-app.MapPost("/quizzes", async (QuizDb db, Quiz quiz) =>
+app.MapPost("/questions", async (QuizDb db, Question question) =>
 {
-    await db.Quizzes.AddAsync(quiz);
+    await db.Questions.AddAsync(question);
     await db.SaveChangesAsync();
-    return Results.Created($"/quiz/{quiz.Id}", quiz);
+    return Results.Created($"/question/{question.Id}", question);
 });
+
+
 app.Run();

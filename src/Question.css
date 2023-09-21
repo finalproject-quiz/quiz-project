@@ -1,7 +1,48 @@
-.question label {
-    display: block;
+.question-wrapper {
+    display: flex;
+    justify-content: center;
 }
 
-.question label:last-of-type{
+.question label {
+    display: flex;
+    width: 20rem;
+    justify-content: space-between;
+
+}
+
+.question label .answer {
+    flex: 1 0 60%;
+}
+
+.question label:last-of-type {
     margin-bottom: 10px;
+}
+
+.question {
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 20px 90px;
+    box-sizing: border-box;
+
+
+}
+
+.activeQuestion {
+    font-size: 16px;
+    font-weight: 500;
+    color: pink;
+
+}
+
+.submitButton {
+    color: blueviolet;
+    background-color: aquamarine;
+}
+
+input[type="radio"] {
+    width: 30px;
+}
+
+.answer-status img {
+    width: 15px;
 }
