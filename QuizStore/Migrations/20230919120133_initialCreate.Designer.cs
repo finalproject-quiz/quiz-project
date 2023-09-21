@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuizStore.Models;
 
@@ -10,9 +11,10 @@ using QuizStore.Models;
 namespace QuizStore.Migrations
 {
     [DbContext(typeof(QuizDb))]
-    partial class QuizDbModelSnapshot : ModelSnapshot
+    [Migration("20230919120133_initialCreate")]
+    partial class initialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -57,8 +59,8 @@ namespace QuizStore.Migrations
                     b.Property<string>("Answer4")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CorrectAnswer")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CorrectAnswer")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .HasColumnType("TEXT");

@@ -11,12 +11,15 @@ h1 {
 }
 
 #title {
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  display: flex; 
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: flex;
+  color: pink;
 }
 
 #wind-farm-silhouette {
   width: 300px;
 }
 
-
+.background {
+  color: aqua;
+}

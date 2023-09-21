@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import "./Login.css"
 
 
 export default function Login(props) {
@@ -13,12 +14,9 @@ export default function Login(props) {
         await props.login(username);
         setUsername("");
     }
-
     return (
-        <Box sx={{
-
-        }}>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+        <Box>
+            <form className='usernameButton' noValidate autoComplete='off' onSubmit={handleSubmit}>
                 <TextField
                     label="Username"
                     name="name"
